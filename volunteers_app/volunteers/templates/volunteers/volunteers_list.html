@@ -1,0 +1,40 @@
+{% extends "volunteers/base.html"%}
+
+
+{% block content %}
+<table class="table table-borderless center">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td style="padding:10px">Nume</td>
+            <td style="padding:10px">Prenume</td>
+            <td style="padding:10px">Email</td>
+            <td style="padding:10px">Numar de telefon</td>
+            <td style="padding:10px">Data nasterii</td>
+            <td style="padding:10px">Filiala</td>
+            <td style="padding:10px"></td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for volunteer in volunteers_list %}
+            <tr>
+                <td style="padding:10px">{{volunteer.first_name}}</td>
+                <td style="padding:10px">{{volunteer.last_name}}</td>
+                <td style="padding:10px">{{volunteer.email}}</td>
+                <td style="padding:10px">{{volunteer.phone}}</td>
+                <td style="padding:10px">{{volunteer.date_of_birth}}</td>
+                <td style="padding:10px">{{volunteer.branch}}</td>
+                <td style="padding:10px">
+                    <a href="{% url 'volunteer_update' volunteer.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg" ></i>
+                    </a>
+                    <form action="{% url 'volunteer_delete' volunteer.id %}" method="post" class="d-inline">
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
